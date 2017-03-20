@@ -1,0 +1,57 @@
+<md-card>
+  <!--Tool Bar-->
+  <md-toolbar color="primary" id="gameToolBarId">
+    {{APP_CONSTANTS.GAME.CHOOSE_HIGHER_OR_LOWER}}
+  </md-toolbar>
+
+  <!--Progress Bar-->
+  <div [hidden]="hideInProgress">
+    <md-progress-bar mode="indeterminate"></md-progress-bar>
+  </div>
+
+  <!--Buttons-->
+  <md-card class="game-cont">
+      <button md-raised-button
+              *ngIf="!showTryAgainButton"
+              [disabled]="!(drawCardModel && drawCardModel.cards && drawCardModel.cards.length > 0)"
+              id="higherButtonId"
+              (click)="higherOrLowerClicked(APP_CONSTANTS.DECK_OF_CARDS.HIGHER)"
+              color="primary">
+        {{APP_CONSTANTS.DECK_OF_CARDS.HIGHER}}
+      </button>
+      <button md-raised-button
+              *ngIf="!showTryAgainButton"
+              [disabled]="!(drawCardModel && drawCardModel.cards && drawCardModel.cards.length > 0)"
+              id="lowerButtonId"
+              (click)="higherOrLowerClicked(APP_CONSTANTS.DECK_OF_CARDS.LOWER)"
+              color="primary">
+        {{APP_CONSTANTS.DECK_OF_CARDS.LOWER}}
+      </button>
+      <button md-raised-button
+              id="tryAgainButtonId"
+              *ngIf="showTryAgainButton"
+              (click)="tryAgainClicked()"
+              color="accent">
+        {{APP_CONSTANTS.DECK_OF_CARDS.TRY_AGAIN}}
+      </button>
+  </md-card>
+
+  <!--Display Cards-->
+  <div *ngIf="drawCardModel && drawCardModel.cards && drawCardModel.cards.length > 0">
+    <md-card class="cards-content">
+      <div>
+        <h2 id="dealerCardLabel">{{APP_CONSTANTS.DECK_OF_CARDS.DEALER_CARD}}</h2>
+        <img src="{{dealerCardImageSource}}"
+             id="dealerCardImageId"
+             alt="Loading..">
+      </div>
+      <div>
+        <h2 id="userGuessYourCardLabel">{{APP_CONSTANTS.DECK_OF_CARDS.PLAYER_CARD}}</h2>
+        <img src="{{playerCardImageSource}}"
+             id="playerCardImageId"
+             alt="Loading..">
+      </div>
+    </md-card>
+  </div>
+
+</md-card>

@@ -1,0 +1,62 @@
+<md-card>
+  <!--Tool Bar-->
+  <md-toolbar color="primary" id="movieInfoToolBarId">
+    {{APP_CONSTANTS.MOVIE.MOVIE_INFO_TAB_HEADER}}
+  </md-toolbar>
+
+  <!--Progress Bar-->
+  <div [hidden]="hideInProgress">
+    <md-progress-bar mode="indeterminate"></md-progress-bar>
+  </div>
+
+  <!--Movie Info-->
+  <md-card class="main-banner">
+    <figure>
+      <img src="{{posterImageSource}}"
+           alt="Loading..">
+    </figure>
+    <div class="text-content">
+      <h2 id="movieName">{{movieInfo.original_title}}</h2>
+      <p id="movieReleaseYear">{{movieInfo.release_date | date : 'yyyy'}}</p>
+      <h2 *ngIf="movieInfo && movieInfo.overview && movieInfo.overview.length > 0">Overview</h2>
+      <p id="movieOverview">{{movieInfo.overview}}</p>
+    </div>
+  </md-card>
+
+  <!--Movie Credits - Cast-->
+  <div *ngIf="movieCredits && movieCredits.cast && movieCredits.cast.length > 0">
+    <h1 class="heading">Cast</h1>
+    <md-card>
+      <div *ngFor="let person of movieCredits.cast" class="cast-item">
+        <a target="_blank"
+           href="{{person.tmdbProfilePath}}">
+          <img src="{{person.profile_path}}"
+               alt="Loading..">
+        </a>
+        <br>
+        <h3>{{person.name}}</h3>
+        <p>{{person.character}}</p>
+      </div>
+    </md-card>
+  </div>
+
+  <!--Movie Credits - Crew -->
+  <div *ngIf="movieCredits && movieCredits.crew && movieCredits.crew.length > 0">
+    <h1 class="heading">Crew</h1>
+    <md-card>
+      <div *ngFor="let person of movieCredits.crew" class="cast-item">
+        <a target="_blank"
+           href="{{person.tmdbProfilePath}}">
+          <img src="{{person.profile_path}}"
+               alt="Loading..">
+        </a>
+        <br>
+        <h3>{{person.name}}</h3>
+        <p>{{person.job}}</p>
+      </div>
+    </md-card>
+  </div>
+
+</md-card>
+
+
